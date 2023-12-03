@@ -5,16 +5,6 @@ export default function ListComponents() {
 
     return(
         
-        <Box py="$10">
-            <FlatList
-                data={countries}
-                renderItem={({ item }) => (
-                    <Text borderBottomWidth="$2" p="$2" borderColor="$secondary100">
-                        {item.country}
-                    </Text>
-                )}
-                keyExtractor={(item) => item.country}
-            />
-        </Box>
+      <></>
     );
 }
