@@ -29,59 +29,59 @@ export default function CustomDrowDown() {
     }
     return (
         <VStack alignItems="center" pt="$20">
-             <Box>
-            <Popover
-                isOpen={isOpen}
-                onClose={handleClose}
-                onOpen={handleOpen}
-                placement="bottom"
-                size="md"
-                trigger={(triggerProps) => {
-                return (
-                    <Pressable  {...triggerProps} >
-                        <HStack borderWidth="$2" p="$2" borderRadius="$md" alignItems="center">
-                            <Text  mr="$8">
-                                {selectedCountry == '' ? 'Select Country' : selectedCountry}
-                            </Text>
-                            <Icon as={ArrowDownIcon}/>
-                        </HStack>
-                    </Pressable>
-                )
-                }}
-                >
-                <PopoverBackdrop />
-                <PopoverContent>
-                <PopoverHeader>
-                    <Input w="92%" variant="outline" size="md" isDisabled={false} isInvalid={false} isReadOnly={false} >
-                        <InputField placeholder='Search' onChangeText={txt => {
-                            onSearch(txt);
-                        }}/>
-                    </Input>
-                    <PopoverCloseButton>
-                        <Icon as={CloseIcon} />
-                    </PopoverCloseButton>
-                </PopoverHeader>
-                <PopoverBody>
-                    <Box py="$10">
-                        <FlatList
-                            data={data}
-                            renderItem={({ item }) => (
-                                <Pressable onPress={() => {
-                                    setSelectedCountry(item.country);
-                                    onSearch('');
-                                    setSearch('');
-                                    handleClose();
-                                }}>
-                                    <Text style={{fontWeight: '600'}}>{item.country}</Text>
-                                </Pressable>
-                            )}
-                            keyExtractor={(item) => item.country}
-                        />
-                    </Box>
-                </PopoverBody>
-                </PopoverContent>
-            </Popover>
-        </Box>
+            <Box>
+                <Popover
+                    isOpen={isOpen}
+                    onClose={handleClose}
+                    onOpen={handleOpen}
+                    placement="bottom"
+                    size="md"
+                    trigger={(triggerProps) => {
+                    return (
+                        <Pressable  {...triggerProps}>
+                            <HStack borderWidth="$2" p="$2" borderRadius="$md" alignItems="center">
+                                <Text  mr="$8">
+                                    {selectedCountry == '' ? 'Select Country' : selectedCountry}
+                                </Text>
+                                <Icon as={ArrowDownIcon}/>
+                            </HStack>
+                        </Pressable>
+                    )
+                    }}
+                    >
+                    <PopoverBackdrop />
+                    <PopoverContent>
+                    <PopoverHeader>
+                        <Input w="92%" variant="outline" size="md" isDisabled={false} isInvalid={false} isReadOnly={false} >
+                            <InputField placeholder='Search' onChangeText={txt => {
+                                onSearch(txt);
+                            }}/>
+                        </Input>
+                        <PopoverCloseButton>
+                            <Icon as={CloseIcon} />
+                        </PopoverCloseButton>
+                    </PopoverHeader>
+                    <PopoverBody>
+                        <Box py="$10">
+                            <FlatList
+                                data={data}
+                                renderItem={({ item }) => (
+                                    <Pressable onPress={() => {
+                                        setSelectedCountry(item.country);
+                                        onSearch('');
+                                        setSearch('');
+                                        handleClose();
+                                    }}>
+                                        <Text style={{fontWeight: '600'}}>{item.country}</Text>
+                                    </Pressable>
+                                )}
+                                keyExtractor={(item) => item.country}
+                            />
+                        </Box>
+                    </PopoverBody>
+                    </PopoverContent>
+                </Popover>
+            </Box>
         </VStack>
        
 
