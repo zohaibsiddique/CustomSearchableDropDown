@@ -1,7 +1,6 @@
 import {Text, Box, Center, ChevronDownIcon, Icon, Input, InputField, Pressable, Select, SelectBackdrop, SelectContent, SelectDragIndicator, SelectDragIndicatorWrapper, SelectIcon, SelectInput, SelectItem, SelectPortal, SelectTrigger, ArrowUpIcon, ArrowDownIcon, HStack, Popover, PopoverBackdrop, PopoverContent, PopoverHeader, Heading, PopoverCloseButton, CloseIcon, PopoverBody, Button, ButtonText, VStack, FlatList } from "@gluestack-ui/themed";
 import { useEffect, useRef, useState } from "react";
 import { countries } from "./countries_list";
-import ListComponents from "./ListComponents";
 
 export default function CustomDrowDown() {
 
