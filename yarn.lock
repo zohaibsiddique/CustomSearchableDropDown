@@ -5603,6 +5603,11 @@ find-yarn-workspace-root@~2.0.0:
   dependencies:
     micromatch "^4.0.2"
 
+flash-list@^0.0.1-security:
+  version "0.0.1-security"
+  resolved "https://registry.npmjs.org/flash-list/-/flash-list-0.0.1-security.tgz"
+  integrity sha512-yWYGvpsR7HAdrdyrce/qlA31PUQeDc+XuYhNe15U0rt3eMMgJv3CR3eWqcO9y2u4hj6h9S2/wREPuMTl5MwkeA==
+
 flow-enums-runtime@^0.0.5:
   version "0.0.5"
   resolved "https://registry.npmjs.org/flow-enums-runtime/-/flow-enums-runtime-0.0.5.tgz"
