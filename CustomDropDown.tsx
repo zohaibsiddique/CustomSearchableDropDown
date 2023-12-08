@@ -8,7 +8,7 @@ export default function CustomDrowDown({list}) {
     const[listData, setListData] = useState(list)
     const[selectedCountry, setSelectedCountry] = useState('')
     const [isOpen, setIsOpen] = useState(false)
-
+    const recyclerRef = useRef(null);
     const onSearch = (search: string) => {
       if (search !== '') {
         let tempData = data.filter(item => {
@@ -28,6 +28,7 @@ export default function CustomDrowDown({list}) {
 
     return (
         <VStack alignItems="center" pt="$20" pl='$16'>
+        <VStack alignItems="center" pt="$20" pl='$16'>
             <Box>
                 <Popover
                     isOpen={isOpen}
@@ -46,7 +47,18 @@ export default function CustomDrowDown({list}) {
                                 </HStack>
                             </Pressable>
                         )
+                        return (
+                            <Pressable  {...triggerProps}>
+                                <HStack borderWidth="$2" p="$2" borderRadius="$md" alignItems="center">
+                                    <Text mr="$8">
+                                        {selectedCountry == '' ? 'Select Country' : selectedCountry}
+                                    </Text>
+                                    <Icon as={ArrowDownIcon} />
+                                </HStack>
+                            </Pressable>
+                        )
                     }}
+                >
                 >
                     <PopoverBackdrop />
                     <PopoverContent>
@@ -63,7 +75,7 @@ export default function CustomDrowDown({list}) {
                     <PopoverBody>
                         <Box py="$10">
                             <FlatList
-                                data={listData}
+                                data={data}
                                 renderItem={({ item }) => (
                                     <Pressable onPress={() => {
                                         setSelectedCountry(item.country);
@@ -84,6 +96,12 @@ export default function CustomDrowDown({list}) {
         </VStack>
 
     );
+
+
+    );
+
+
+
 
 
 
