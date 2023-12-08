@@ -46,16 +46,6 @@ export default function CustomDrowDown({list}) {
                                 </HStack>
                             </Pressable>
                         )
-                        return (
-                            <Pressable  {...triggerProps}>
-                                <HStack borderWidth="$2" p="$2" borderRadius="$md" alignItems="center">
-                                    <Text mr="$8">
-                                        {selectedCountry == '' ? 'Select Country' : selectedCountry}
-                                    </Text>
-                                    <Icon as={ArrowDownIcon} />
-                                </HStack>
-                            </Pressable>
-                        )
                     }}
                 >
                     <PopoverBackdrop />
