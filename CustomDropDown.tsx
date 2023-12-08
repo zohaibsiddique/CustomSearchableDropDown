@@ -28,7 +28,6 @@ export default function CustomDrowDown({list}) {
 
     return (
         <VStack alignItems="center" pt="$20" pl='$16'>
-        <VStack alignItems="center" pt="$20" pl='$16'>
             <Box>
                 <Popover
                     isOpen={isOpen}
@@ -59,7 +58,6 @@ export default function CustomDrowDown({list}) {
                         )
                     }}
                 >
-                >
                     <PopoverBackdrop />
                     <PopoverContent>
                     <PopoverHeader>
@@ -75,7 +73,7 @@ export default function CustomDrowDown({list}) {
                     <PopoverBody>
                         <Box py="$10">
                             <FlatList
-                                data={data}
+                                data={listData}
                                 renderItem={({ item }) => (
                                     <Pressable onPress={() => {
                                         setSelectedCountry(item.country);
@@ -94,8 +92,6 @@ export default function CustomDrowDown({list}) {
                 </Popover>
             </Box>
         </VStack>
-
-    );
 
 
     );
