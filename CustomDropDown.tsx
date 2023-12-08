@@ -7,9 +7,8 @@ export default function CustomDrowDown({list}) {
     const[data, setData] = useState(list)
     const[listData, setListData] = useState(list)
     const[selectedCountry, setSelectedCountry] = useState('')
-    const searchRef = useRef()
     const [isOpen, setIsOpen] = useState(false)
-    const recyclerRef = useRef(null);
+
     const onSearch = (search: string) => {
       if (search !== '') {
         let tempData = data.filter(item => {
@@ -26,31 +25,6 @@ export default function CustomDrowDown({list}) {
     const handleClose = () => {
         setIsOpen(false)
     }
-    const layoutProvider = new LayoutProvider(
-        (index) => index,
-        (_, dim) => {
-            dim.width = 150;
-            dim.height = 30;
-        }
-    );
-    const dataProvider = new DataProvider((r1, r2) => r1 !== r2).cloneWithRows(data);
-
-
-    const rowRenderer = (_, rowData) => {
-        return (
-            <Pressable onPress={() => handleCountrySelect(rowData.country)}>
-                <Box >
-                    <Text>{rowData.country}</Text>
-                </Box>
-            </Pressable>
-        );
-    };
-
-
-    const handleCountrySelect = (country) => {
-        setSelectedCountry(country);
-        setIsOpen(false);
-    };
 
     return (
         <VStack alignItems="center" pt="$20" pl='$16'>
@@ -89,7 +63,7 @@ export default function CustomDrowDown({list}) {
                     <PopoverBody>
                         <Box py="$10">
                             <FlatList
-                                data={data}
+                                data={listData}
                                 renderItem={({ item }) => (
                                     <Pressable onPress={() => {
                                         setSelectedCountry(item.country);
