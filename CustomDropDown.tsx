@@ -3,9 +3,10 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { countries } from "./countries_list";
 import { RecyclerListView, DataProvider, LayoutProvider } from "recyclerlistview";
 export default function CustomDrowDown() {
-
+    const [isFound, setIsFound] = useState(true)
     const [search, setSearch] = useState('')
     const [data, setData] = useState(countries)
+    const [listData, setListData] = useState(countries)
     const [selectedCountry, setSelectedCountry] = useState('')
     const searchRef = useRef()
     const [isOpen, setIsOpen] = useState(false)
@@ -15,9 +16,16 @@ export default function CustomDrowDown() {
             let tempData = data.filter(item => {
                 return item.country.toLowerCase().indexOf(search.toLowerCase()) > -1;
             });
-            setData(tempData);
+            if (tempData.length > 0) {
+                setListData(tempData);
+
+                console.log(tempData)
+            } else {
+                setIsFound(false)
+            }
+            
         } else {
-            setData(countries);
+             setListData(countries);
         }
         recyclerRef.current.scrollToTop();
     };
@@ -26,6 +34,8 @@ export default function CustomDrowDown() {
     }
     const handleClose = () => {
         setIsOpen(false)
+        setIsFound(true)
+        setListData(countries)
     }
     const layoutProvider = new LayoutProvider(
         (index) => index,
@@ -34,7 +44,7 @@ export default function CustomDrowDown() {
             dim.height = 30;
         }
     );
-    const dataProvider = new DataProvider((r1, r2) => r1 !== r2).cloneWithRows(data);
+    const dataProvider = new DataProvider((r1, r2) => r1 !== r2).cloneWithRows(listData);
 
 
     const rowRenderer = (_, rowData) => {
@@ -89,15 +99,17 @@ export default function CustomDrowDown() {
                         </PopoverHeader>
                         <PopoverBody h='100%'>
                             <Box py="$10" height='$48' width='60%'>
-
-                                <RecyclerListView
+                                {
+                                    isFound?  <RecyclerListView
                                     ref={recyclerRef}
                                     layoutProvider={layoutProvider}
                                     dataProvider={dataProvider}
                                     rowRenderer={rowRenderer}
                                     renderAheadOffset={500}
 
-                                />
+                                />: <Text>No match found</Text>
+                                }
+                               
                             </Box>
                         </PopoverBody>
                     </PopoverContent>
