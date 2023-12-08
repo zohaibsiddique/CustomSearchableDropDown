@@ -9,7 +9,7 @@ export default function CustomDrowDown({list}) {
     const[selectedCountry, setSelectedCountry] = useState('')
     const searchRef = useRef()
     const [isOpen, setIsOpen] = useState(false)
-
+    const recyclerRef = useRef(null);
     const onSearch = (search: string) => {
       if (search !== '') {
         let tempData = data.filter(item => {
@@ -26,8 +26,34 @@ export default function CustomDrowDown({list}) {
     const handleClose = () => {
         setIsOpen(false)
     }
+    const layoutProvider = new LayoutProvider(
+        (index) => index,
+        (_, dim) => {
+            dim.width = 150;
+            dim.height = 30;
+        }
+    );
+    const dataProvider = new DataProvider((r1, r2) => r1 !== r2).cloneWithRows(data);
+
+
+    const rowRenderer = (_, rowData) => {
+        return (
+            <Pressable onPress={() => handleCountrySelect(rowData.country)}>
+                <Box >
+                    <Text>{rowData.country}</Text>
+                </Box>
+            </Pressable>
+        );
+    };
+
+
+    const handleCountrySelect = (country) => {
+        setSelectedCountry(country);
+        setIsOpen(false);
+    };
+
     return (
-        <VStack alignItems="center" pt="$20">
+        <VStack alignItems="center" pt="$20" pl='$16'>
             <Box>
                 <Popover
                     isOpen={isOpen}
@@ -36,18 +62,18 @@ export default function CustomDrowDown({list}) {
                     placement="bottom"
                     size="md"
                     trigger={(triggerProps) => {
-                    return (
-                        <Pressable  {...triggerProps}>
-                            <HStack borderWidth="$2" p="$2" borderRadius="$md" alignItems="center">
-                                <Text  mr="$8">
-                                    {selectedCountry == '' ? 'Select Country' : selectedCountry}
-                                </Text>
-                                <Icon as={ArrowDownIcon}/>
-                            </HStack>
-                        </Pressable>
-                    )
+                        return (
+                            <Pressable  {...triggerProps}>
+                                <HStack borderWidth="$2" p="$2" borderRadius="$md" alignItems="center">
+                                    <Text mr="$8">
+                                        {selectedCountry == '' ? 'Select Country' : selectedCountry}
+                                    </Text>
+                                    <Icon as={ArrowDownIcon} />
+                                </HStack>
+                            </Pressable>
+                        )
                     }}
-                    >
+                >
                     <PopoverBackdrop />
                     <PopoverContent>
                     <PopoverHeader>
@@ -63,7 +89,7 @@ export default function CustomDrowDown({list}) {
                     <PopoverBody>
                         <Box py="$10">
                             <FlatList
-                                data={listData}
+                                data={data}
                                 renderItem={({ item }) => (
                                     <Pressable onPress={() => {
                                         setSelectedCountry(item.country);
@@ -82,10 +108,11 @@ export default function CustomDrowDown({list}) {
                 </Popover>
             </Box>
         </VStack>
-       
 
-       
-        
-        
-    )
+    );
+
+
+
+
+
 }
