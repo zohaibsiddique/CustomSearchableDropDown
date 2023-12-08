@@ -1,11 +1,11 @@
 import {Text, Box, Center, ChevronDownIcon, Icon, Input, InputField, Pressable, Select, SelectBackdrop, SelectContent, SelectDragIndicator, SelectDragIndicatorWrapper, SelectIcon, SelectInput, SelectItem, SelectPortal, SelectTrigger, ArrowUpIcon, ArrowDownIcon, HStack, Popover, PopoverBackdrop, PopoverContent, PopoverHeader, Heading, PopoverCloseButton, CloseIcon, PopoverBody, Button, ButtonText, VStack, FlatList } from "@gluestack-ui/themed";
 import { useEffect, useRef, useState } from "react";
-import { countries } from "./countries_list";
 
-export default function CustomDrowDown() {
+export default function CustomDrowDown({list}) {
 
     const[search, setSearch] = useState('')
-    const[data, setData] = useState(countries)
+    const[data, setData] = useState(list)
+    const[listData, setListData] = useState(list)
     const[selectedCountry, setSelectedCountry] = useState('')
     const searchRef = useRef()
     const [isOpen, setIsOpen] = useState(false)
@@ -15,9 +15,9 @@ export default function CustomDrowDown() {
         let tempData = data.filter(item => {
           return item.country.toLowerCase().indexOf(search.toLowerCase()) > -1;
         });
-        setData(tempData);
+        setListData(tempData);
       } else {
-        setData(countries);
+        setListData(list);
       }
     };
     const handleOpen = () => {
@@ -63,7 +63,7 @@ export default function CustomDrowDown() {
                     <PopoverBody>
                         <Box py="$10">
                             <FlatList
-                                data={data}
+                                data={listData}
                                 renderItem={({ item }) => (
                                     <Pressable onPress={() => {
                                         setSelectedCountry(item.country);
